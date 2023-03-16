@@ -14,7 +14,7 @@ CREATE TABLE comprasCliente (
     totalCompra DOUBLE
 );
 
-# creo tabla para almacenar los datos de las compras realizadas al proveedor
+#  Tabla para almacenar los datos de las compras realizadas al proveedor
 CREATE TABLE comprasAlmacen (
     comprasAlmacen_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
     fechaCompra DATE,
@@ -25,7 +25,7 @@ CREATE TABLE comprasAlmacen (
     FOREIGN KEY (proveedor_id) REFERENCES proveedor (proveedor_id)
 );
 
-# Crear tabla para almacenar los detalles de las compras
+#  Tabla para almacenar los detalles de las compras
 CREATE TABLE detalleCompra (
     detalleCompra_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
     cantProductos INT,
@@ -35,7 +35,7 @@ CREATE TABLE detalleCompra (
     FOREIGN KEY (comprasAlmacen_id) REFERENCES comprasAlmacen (comprasAlmacen_id)
 );
 
-#  tabla para almacenar los datos de los productos con el precio de venta (el precio al que lo vende) y de compra (el precio de compra que lo adquirió el almacenero)
+#  Tabla para almacenar los datos de los productos con el precio de venta (el precio al que lo vende) y de compra (el precio de compra que lo adquirió el almacenero)
 # Almacenar la información sobre los productos que se venden incluyendo la cantidad en stock
 CREATE TABLE productos (
     productos_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE productos (
     FOREIGN KEY (detalleCompra_id) REFERENCES detalleCompra (detalleCompra_id)
 );
 
-#  tabla para guardar a los distintos proveedores del almacén con sus respectivos datos
+#  Tabla para guardar a los distintos proveedores del almacén con sus respectivos datos
 CREATE TABLE proveedor (
     proveedor_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nombre VARCHAR (20),
@@ -58,7 +58,7 @@ CREATE TABLE proveedor (
     email VARCHAR (30)
 );
 
-#  una tabla para que almacene los datos de las cajas
+#  Tabla para que almacene los datos de las cajas
 CREATE TABLE flujoCaja (
     flujoCaja_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
     cantidad INT,
@@ -68,7 +68,9 @@ CREATE TABLE flujoCaja (
     FOREIGN KEY (comprasCliente_id) REFERENCES comprasCliente (comprasCliente_id)
 );
 
-# Insertos datos de prueba
+#--------------------------------------------------------------------------
+	
+# Inseto los datos de prueba
 INSERT INTO comprasCliente (fechaCompra, numProductos, formaPago, totalCompra)
 VALUES  ('2023-03-15', 2, 'Efectivo', 3000),
 		('2023-03-16', 1, 'Debito', 1000),
@@ -113,9 +115,9 @@ VALUES (3, 900, 1, 1),
         (3, 300, 1, 4),
         (3, 1000, 5, 5);
         
-#____________________________________________________________________
+#--------------------------------------------------------------------------
 	
-    #Realizo pruebas simples
+    #Pruebas simples
     
 SELECT nombre, direccion, email FROM proveedor;
 
@@ -123,7 +125,9 @@ SELECT *
 FROM productos
 WHERE precioVenta > 100; #solo logre que me trajiera la galleta triton :C
 
- #Realizo pruebas con Join
+#--------------------------------------------------------------------------
+	
+ #Pruebas con JOIN
  
 SELECT proveedor.nombre, comprasAlmacen.fechaCompra, comprasAlmacen.totalCompra 
 FROM comprasAlmacen 
